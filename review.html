@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review</title>
+    <style>
+        body {
+            background-image: url('reviewimg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat; 
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        
+        /* Change text color to white */
+        select, textarea,
+        input[type="text"]
+        {
+color:black
+        }
+        label
+        {
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            padding-left: 10px;
+        }
+        
+        button {
+            cursor: pointer;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+            
+        }
+        
+        h1 {
+            color: white;
+            padding-left: 10px;
+            padding-top: 0px;
+        }
+
+        .header {
+            background-color: #808080; /* Grey color */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .view-reviews-btn {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Want to see what others think about the movie??</h1>
+        <form action="reviewdata.php" method="GET">
+            <button class="view-reviews-btn" type="submit">View Reviews</button>
+        </form>
+    </div>
+
+    <h1>Add Review</h1>
+    <form action="review.php" method="POST">
+        <label for="user_id">User ID:&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="user_id" name="user_id"><br><br>
+        <label for="movie_id">Movie ID:</label>
+        <input type="text" id="movie_id" name="movie_id"><br><br>
+ 
+        <label for="rating">Rating:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <select name="rating" id="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br><br>
+        <label for="comment">Comment:</label><br><br>
+        &nbsp;&nbsp;<textarea name="comment" id="comment" cols="30" rows="5"></textarea><br>
+       <br><br>
+       &nbsp;&nbsp;<button type="submit">Submit Review</button>
+    </form>
+   
+</body>
+</html>

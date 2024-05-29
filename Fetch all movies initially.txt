@@ -1,0 +1,108 @@
+// Fetch all movies initially
+$query = "SELECT * FROM movies";
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    echo "<h2>All Movies</h2>";
+    echo "<ul>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<li>{$row['title']} (ID: {$row['id']})";
+        echo "<ul>";
+        echo "<li>Directed by {$row['director']}</li>";
+        echo "<li>Year: {$row['release_year']}</li>";
+        echo "<li>Movie rating is {$row['rating']}</li>";
+        echo "<li>Comments - {$row['comment']}</li>";
+        echo "</ul>";
+        echo "</li>";
+    }
+    echo "</ul>";
+} else {
+    echo "No movies found.";
+}
+
+
+
+
+// Check if form is submitted for search
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve search parameters
+    $search_id = $_POST['movie_id'];
+    $search_title = $_POST['movie_title'];
+    $search_rating = $_POST['rating'];
+
+    // Construct the query based on the search parameters
+    $query = "SELECT * FROM movies WHERE 1=1"; // Start with a base query
+
+    if (!empty($search_id)) {
+        $query .= " AND id = '$search_id'";
+    }
+
+    if (!empty($search_title)) {
+        $query .= " AND title LIKE '%$search_title%'";
+    }
+
+    if (!empty($search_rating)) {
+        $query .= " AND rating ='$search_rating'";
+    }
+    // Execute the query
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        echo "<h2>Search Results</h2>";
+        echo "<ul>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<li>{$row['title']} (ID: {$row['id']}) - Directed by {$row['director']} ({$row['release_year']})</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "No matching movies found.";
+    }
+}
+?>
+
+<?php
+require_once('db_config.php');
+
+// Check if form is submitted for search
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve search parameters
+    $search_id = $_POST['movie_id'];
+    $search_title = $_POST['movie_title'];
+    $search_rating = $_POST['rating'];
+
+    // Construct the query based on the search parameters
+    $query = "SELECT * FROM movies WHERE 1=1"; // Start with a base query
+
+    if (!empty($search_id)) {
+        $query .= " AND id = '$search_id'";
+    }
+
+    if (!empty($search_title)) {
+        $query .= " AND title LIKE '%$search_title%'";
+    }
+
+    if (!empty($search_rating)) {
+        $query .= " AND rating ='$search_rating'";
+    }
+
+    // Execute the query
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        echo "<h2>Search Results</h2>";
+        echo "<table border='1'>";
+        echo "<tr><th>Title</th><th>ID</th><th>Director</th><th>Release Year</th></tr>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>{$row['title']}</td>";
+            echo "<td>{$row['id']}</td>";
+            echo "<td>{$row['director']}</td>";
+            echo "<td>{$row['release_year']}</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No matching movies found.";
+    }
+}
+?>
