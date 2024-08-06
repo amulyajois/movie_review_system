@@ -31,4 +31,5 @@ Welcome to the **Movie Review System**! This web-based application provides a pl
 
 4. **Run the Application**:
     - Deploy the application on a local server like XAMPP or WAMP.
-*Movie Review System - Connecting movie enthusiasts and facilitating engaging reviews!*
+      
+**Movie Review System - Connecting movie enthusiasts and facilitating engaging reviews!**
